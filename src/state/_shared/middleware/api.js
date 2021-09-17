@@ -13,7 +13,7 @@ import {
  } from '../store/constants';
 import {apiInitialState} from '../store/index';
 import axios from 'axios';
-import {axiosWithAuth} from "../../../common/utils/axiosWithAuth";
+import {axiosWithAuth} from "../../../helpers/axiosWithAuth";
 
 const baseURL = "https://sauti-market-bw.herokuapp.com";
 // endpoints:

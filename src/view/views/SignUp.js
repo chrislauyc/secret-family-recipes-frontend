@@ -1,61 +1,27 @@
 import React, { useState, useEffect } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import * as yup from "yup";
-// import { axiosWithAuth } from "../../../helpers/axiosWithAuth";
-
-import schema from "../../../validation/SignInSchema";
-import SignInForm from "../SignInForm";
 import axios from "axios";
 
-/*
-import { axiosWithAuth } from "../helpers/axiosWithAuth";
+import schema from "../validation/signUpSchema";
+import SignUpForm from "../components/SignUpForm";
 
-const initialState = {
-    username: "",
-    email: "",
-    password: "",
-  };
-  const history = useHistory();
-  const [credentials, setCredentials] = useState(initialState);
-
-  //The SignIn is not working fully yet.
-  const handleChanges = (e) => {
-    // console.log("value: ", e.target.value);
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
-
-  const submitSignUp = (e) => {
-    e.preventDefault();
-    // validate();
-
-    axiosWithAuth
-      .post("/auth/register", credentials)
-      .then((res) => {
-        console.log("happy path: ", res.data);
-        // localStorage.setItem("token", res.data);
-        // history.push("/private");
-      })
-      .catch((err) => {
-        console.log("sad path: ", err);
-      });
-  };
-
-*/
 
 const initialFormValues = {
   username: "",
+  email: "",
   password: "",
 };
 
 const initialFormErrors = {
   username: "",
+  email: "",
   password: "",
 };
 
 const initialDisabled = true;
-
-export default function LogIn() {
-  // const history = useHistory();
+export default function SignUp() {
+  const history = useHistory();
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
@@ -92,39 +58,36 @@ export default function LogIn() {
     });
   }, [formValues]);
 
-  const logInUser = (userInformation) => {
+  const registerUser = (newUser) => {
     axios
       .post(
-        "https://family-recipes-app.herokuapp.com/auth/login",
-        userInformation
+        "https://secret-family-recipes6.herokuapp.com/api/auth/register",
+        newUser
       )
       .then((res) => {
-
         console.log("happy path: ", res.data);
-        console.log("MY token", res.data.token);
-        // localStorage.setItem("token", res.data.token);
-        // history.push("/home");
+        localStorage.setItem("token", res.data.token);
+        history.push("/home");
       })
       .catch((err) => {
-        // alert("failed!");
         console.log("sad path: ", err);
-        // debugger;
+        debugger;
       })
       .finally(setFormValues(initialFormValues));
   };
 
   const formSubmit = () => {
-    const userInformation = {
+    const newUser = {
       username: formValues.username.trim(),
+      email: formValues.email.trim(),
       password: formValues.password.trim(),
     };
-
-    logInUser(userInformation);
+    registerUser(newUser);
   };
 
   return (
     <>
-      <SignInForm
+      <SignUpForm
         values={formValues}
         change={inputChange}
         submit={formSubmit}
