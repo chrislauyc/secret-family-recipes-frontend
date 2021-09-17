@@ -1,99 +1,86 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import * as yup from "yup";
-import axios from "axios";
+import { Link, useHistory } from "react-router-dom";
 
-import schema from "../validation/signUpSchema";
-import SignUpForm from "../components/SignUpForm";
+import { Grid, Paper, Button, TextField } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
 
 
-const initialFormValues = {
-  username: "",
-  email: "",
-  password: "",
-};
+const useStyles = makeStyles((theme) => ({
+  PapersStyle: {
+    height: "70vh",
+    width: "80%",
+    margin: "5% auto 0 auto",
+  },
+  titleStyle: {
+    fontSize: "5rem",
+    textAlign: "center",
+  },
+  textFieldStyle: {
+    width: "70%",
+    padding: "2px",
+  },
+  ButtonStyle: {
+    marginTop: "5%",
+    height: "20%",
+    width: "60%",
+    borderRadius: "50px",
+    fontSize: "1.75rem",
+  },
+}));
 
-const initialFormErrors = {
-  username: "",
-  email: "",
-  password: "",
-};
+export default function SignUpForm({ values, change, submit, disabled, errors }) {
+  const classes = useStyles();
 
-const initialDisabled = true;
-export default function SignUp() {
-  const history = useHistory();
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [disabled, setDisabled] = useState(initialDisabled);
+  let history = useHistory();
 
-  const validate = (name, value) => {
-    yup
-      .reach(schema, name)
-      .validate(value)
-      .then((valid) => {
-        setFormErrors({
-          ...formErrors,
-          [name]: "",
-        });
-      })
-      .catch((err) => {
-        setFormErrors({
-          ...formErrors,
-          [name]: err.errors[0],
-        });
-      });
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+    submit();
+    history.push("/");
   };
 
-  const inputChange = (name, value) => {
-    validate(name, value);
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
+  const onChange = (evt) => {
+    // const { name, value, type, checked } = evt.target;
+    // const valueTouse = type === "checkbox" ? checked : value;
+    // change(name, valueTouse);
 
-  useEffect(() => {
-    schema.isValid(formValues).then((valid) => {
-      setDisabled(!valid);
-    });
-  }, [formValues]);
-
-  const registerUser = (newUser) => {
-    axios
-      .post(
-        "https://secret-family-recipes6.herokuapp.com/api/auth/register",
-        newUser
-      )
-      .then((res) => {
-        console.log("happy path: ", res.data);
-        localStorage.setItem("token", res.data.token);
-        history.push("/home");
-      })
-      .catch((err) => {
-        console.log("sad path: ", err);
-        debugger;
-      })
-      .finally(setFormValues(initialFormValues));
-  };
-
-  const formSubmit = () => {
-    const newUser = {
-      username: formValues.username.trim(),
-      email: formValues.email.trim(),
-      password: formValues.password.trim(),
-    };
-    registerUser(newUser);
+    const { name, value } = evt.target;
+    change(name, value);
   };
 
   return (
-    <>
-      <SignUpForm
-        values={formValues}
-        change={inputChange}
-        submit={formSubmit}
-        disabled={disabled}
-        errors={formErrors}
-      />
-    </>
+    <form onSubmit={onSubmit} className="signPage-form">
+      <Paper elevation={10} className={classes.PapersStyle}>
+        <Grid container justifyContent="space-around" alignItems="center" className="signPage-grid-container">
+          <Grid className="signPage-grid-item" alignItems="center" item sm={6} xs={12}>
+            <h2 className={classes.titleStyle}>Sign Up</h2>
+
+            {/* username */}
+
+            <TextField id="signup-username" className={classes.textFieldStyle} label="Username" placeholder="Enter Username" type="text" value={values.username} name="username" onChange={onChange} fullWidth />
+
+            {/* email */}
+
+            <TextField id="signup-email" className={classes.textFieldStyle} label="Email" placeholder="Enter Email" type="email" value={values.email} onChange={onChange} name="email" fullWidth />
+
+            {/* password */}
+
+            <TextField id="signup-password" className={classes.textFieldStyle} label="Password" placeholder="Enter Password" type="password" name="password" value={values.password} onChange={onChange} fullWidth />
+          </Grid>
+
+          <Grid className="signPage-grid-item" alignItems="center" item sm={6} xs={12}>
+            <Button className={classes.ButtonStyle} type="submit" color="primary" variant="contained" disabled={disabled}>
+              Register
+            </Button>
+
+            <label style={{ fontSize: "1.5rem" }}>
+              Already have an account?
+              <Link to="/">
+                <span> Sign In</span>
+              </Link>
+            </label>
+          </Grid>
+        </Grid>
+      </Paper>
+    </form>
   );
 }

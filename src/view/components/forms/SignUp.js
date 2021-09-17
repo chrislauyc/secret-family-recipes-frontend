@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import axios from "axios";
 
-import schema from "../validation/signUpSchema";
-import SignUpForm from "../components/SignUpForm";
+import schema from "../../../validation/signUpSchema";
+import SignUpForm from "../SignUpForm";
 
 
 const initialFormValues = {
@@ -61,7 +61,7 @@ export default function SignUp() {
   const registerUser = (newUser) => {
     axios
       .post(
-        "https://secret-family-recipes6.herokuapp.com/api/auth/register",
+        "https://family-recipes-app.herokuapp.com/auth/register",
         newUser
       )
       .then((res) => {
