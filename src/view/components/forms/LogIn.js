@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import * as yup from "yup";
-import { axiosWithAuth } from "../../../helpers/axiosWithAuth";
+// import { axiosWithAuth } from "../../../helpers/axiosWithAuth";
 
 import schema from "../../../validation/SignInSchema";
 import SignInForm from "../SignInForm";
@@ -55,7 +55,7 @@ const initialFormErrors = {
 const initialDisabled = true;
 
 export default function LogIn() {
-  const history = useHistory();
+  // const history = useHistory();
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import PrivateRoute from './view/PrivateRoute'
+// import PrivateRoute from './view/PrivateRoute'
 import LogIn from './view/components/forms/LogIn';
 import Signup from './view/components/forms/SignUp'
 
