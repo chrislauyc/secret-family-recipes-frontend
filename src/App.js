@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React, { useState, useMemo } from "react";
 
-import PrivateRoute from './view/PrivateRoute'
+// import PrivateRoute from './view/PrivateRoute'
 import LogIn from './view/components/forms/LogIn';
 import Signup from './view/components/forms/SignUp'
 import Home from './view/components/Home'

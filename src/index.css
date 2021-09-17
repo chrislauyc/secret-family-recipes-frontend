@@ -40,9 +40,6 @@ code {
 }
 
 @media only screen and (max-width: 959px) {
-  .ApBarRoot {
-  }
-
   .AppBarTitle {
     margin: auto 25% !important;
     /* font-size: 2rem !important; */
