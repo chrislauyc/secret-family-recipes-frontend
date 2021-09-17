@@ -1,7 +1,8 @@
 // import PrivateRoute from "./components/PrivateRoute";
 import React, { useState } from "react";
-import RecipeCards from "../components/RecipeCards";
-import AppBarHead from "../components/AppBarHead";
+import RecipeCards from "./RecipeCards";
+import AppBarHead from "./AppBarHead";
+
 export default function Home() {
   const [searchForm, setSearchForm] = useState({
     searchCategory: "all",
