@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { axiosWithAuth } from "../../../helpers/axiosWithAuth";
 
 import schema from "../../../validation/SignInSchema";
-import SignInForm from "../SignInForm";
+import SignInForm from "./SignInForm";
 import axios from "axios";
 
 /*

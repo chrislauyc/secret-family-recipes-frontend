@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Typography, Button, Card, makeStyles, CardContent, CardActions, Collapse, Grid, IconButton } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Typography, Button, Card, makeStyles, CardContent, CardActions, Grid, IconButton } from "@material-ui/core";
+
 import clsx from "clsx";
 import { red } from "@material-ui/core/colors";
 
@@ -76,7 +76,7 @@ export default function RecipeCard({ cardInfo }) {
               </Link>
             </Grid>
 
-            {/* EXPAND BUTTON */}
+            {/* EXPAND BUTTON
             <Grid item justify="flex-end">
               <IconButton onClick={handleExpandClick}>
                 <ExpandMoreIcon
@@ -88,10 +88,11 @@ export default function RecipeCard({ cardInfo }) {
                 />
               </IconButton>
             </Grid>
+          </Grid> */}
           </Grid>
         </CardActions>
 
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography className={classes.pos} variant="body2" component="p">
               <Typography color="primary">Ingredients</Typography>
@@ -102,7 +103,7 @@ export default function RecipeCard({ cardInfo }) {
               {cardInfo.instructions}
             </Typography>
           </CardContent>
-        </Collapse>
+        </Collapse> */}
       </Card>
     </>
   );

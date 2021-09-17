@@ -4,7 +4,7 @@ import * as yup from "yup";
 import axios from "axios";
 
 import schema from "../../../validation/signUpSchema";
-import SignUpForm from "../SignUpForm";
+import SignUpForm from "./SignUpForm";
 
 
 const initialFormValues = {

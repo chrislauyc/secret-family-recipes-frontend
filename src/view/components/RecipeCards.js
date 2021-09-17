@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import { Container, Grid } from "@material-ui/core";
-import { cardsInformation } from "../dummyData";
+import { cardsInformation } from "../../dummyData";
 import RecipeCard from "./RecipeCard";
-import { RecipeContext } from "../context/RecipeContext";
-import { axiosWithAuth } from "../helpers/axiosWithAuth";
+import { RecipeContext } from "../../context/RecipeContext";
+import { axiosWithAuth } from "../../helpers/axiosWithAuth";
 
 export default function RecipeCards({ searchForm }) {
   const { searchCategory, searchTerm } = searchForm;
