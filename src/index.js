@@ -18,9 +18,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk,logger));
 ReactDOM.render(
   <React.StrictMode>
     {/* Wrap app in Provider passing in store as props */}
-    <Provider store={store}>
     <App />
-    </Provider>
   </React.StrictMode>,
   document.getElementById( 'root' )
 );
