@@ -20,7 +20,8 @@ export default function RecipeCards({ searchForm }) {
         console.log(err);
         debugger;
       });
-  }, []);
+    });
+
   console.log("recipes: ", recipe);
   console.log("Dummy data: ", cardsInformation);
 
@@ -48,9 +49,9 @@ export default function RecipeCards({ searchForm }) {
               </Grid>
             );
           } else {
-            //pass
+            return (<div></div>)
           }
-        })}
+          })}
       </Grid>
     </Container>
   );

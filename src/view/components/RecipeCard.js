@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { Typography, Button, Card, makeStyles, CardContent, CardActions, Grid, IconButton } from "@material-ui/core";
+import { Typography, Button, Card, makeStyles, CardContent, CardActions, Grid } from "@material-ui/core";
 
-import clsx from "clsx";
+// import clsx from "clsx";
 import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,11 +33,11 @@ const useStyles = makeStyles((theme) => ({
 export default function RecipeCard({ cardInfo }) {
   const classes = useStyles();
   const { id } = useParams();
-  const [expanded, setExpanded] = useState(false);
+  // const [expanded, setExpanded] = useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded);
+  // };
 
   console.log("id in recipecard component: ", id);
   // console.log("card info id: ", cardInfo.id);
