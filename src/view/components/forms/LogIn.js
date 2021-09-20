@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 // import { axiosWithAuth } from "../../../helpers/axiosWithAuth";
 
@@ -55,7 +55,7 @@ const initialFormErrors = {
 const initialDisabled = true;
 
 export default function LogIn() {
-  // const history = useHistory();
+  const history = useHistory();
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
@@ -95,15 +95,15 @@ export default function LogIn() {
   const logInUser = (userInformation) => {
     axios
       .post(
-        "https://family-recipes-app.herokuapp.com/auth/login",
+        "https://family-recipes-app.herokuapp.com/mock/auth/login",
         userInformation
       )
       .then((res) => {
 
         console.log("happy path: ", res.data);
-        console.log("MY token", res.data.token);
-        // localStorage.setItem("token", res.data.token);
-        // history.push("/home");
+        console.log("MY id", res.data.user_id);
+        localStorage.setItem("id", res.data.user_id);
+        history.push("/home");
       })
       .catch((err) => {
         // alert("failed!");
