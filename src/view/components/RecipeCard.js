@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Typography, Button, Card, makeStyles, CardContent, CardActions, Grid } from "@material-ui/core";
-// import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 // import clsx from "clsx";
 import { red } from "@material-ui/core/colors";
@@ -32,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipeCard({ cardInfo }) {
-  // const {push} = useHistory();
+  const {push} = useHistory();
   const classes = useStyles();
-  const { id } = useParams();
+  const { id } = useParams;
   
 
   const handleClick = () => {

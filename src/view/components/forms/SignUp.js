@@ -58,7 +58,7 @@ export default function SignUp() {
     });
   }, [formValues]);
 
-  const registerUser = (newUser) => {
+  const registerUser = (newUser, userToLogIn) => {
     axios
       .post(
         "https://family-recipes-app.herokuapp.com/api/auth/register",
@@ -67,6 +67,20 @@ export default function SignUp() {
       .then((res) => {
         console.log("happy path: ", res.data);
         localStorage.setItem("id", res.data.user_id);
+        axios
+          .post(
+            "https://family-recipes-app.herokuapp.com/api/auth/login",
+            userToLogIn
+          )
+          .then((res) => {
+            console.log("happy path: ", res.data);
+            localStorage.setItem("token", res.data.token);
+            console.log(res.data.token)
+            history.push("/home");
+          })
+          .catch((err) => {
+            console.log("sad path: ", err);
+          })
         history.push("/home");
       })
       .catch((err) => {
@@ -82,7 +96,11 @@ export default function SignUp() {
       email: formValues.email.trim(),
       password: formValues.password.trim(),
     };
-    registerUser(newUser);
+    const userToLogIn = {
+      username: formValues.username.trim(),
+      password: formValues.password.trim(),
+    };
+    registerUser(newUser, userToLogIn);
   };
 
   return (

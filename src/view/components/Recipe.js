@@ -1,40 +1,32 @@
-import React, { useEffect, useContext } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
+// import { makeStyles } from "@material-ui/core/styles";
 import { MenuItem, Button, Grid, Typography, Paper, TextField, Select } from "@material-ui/core";
 import { RecipeContext } from "../../context/RecipeContext";
 
-import { axiosWithAuth } from "../../helpers/axiosWithAuth";
-import axios from "axios";
+// import { axiosWithAuth } from "../../helpers/axiosWithAuth";
+// import axios from "axios";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "25ch",
-    },
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     "& .MuiTextField-root": {
+//       margin: theme.spacing(1),
+//       width: "25ch",
+//     },
+//   },
+// }));
 
 export default function Recipe() {
-  const { recipe, setRecipe } = useContext(RecipeContext);
+  const { recipe } = useContext(RecipeContext);
   const history = useHistory();
-  const classes = useStyles();
-  const { id } = useParams();
-  console.log("id in edit component: ", id);
+//   const classes = useStyles();
+//   const { id } = useParams();
 
 
-  const handleReturn = () => {
-    axiosWithAuth()
-      .delete(`https://secret-family-recipes6.herokuapp.com/api/recipes/${id}`)
-      .then(() => {
-        console.log("Deleted item succefully.");
-        history.push("/home");
-      })
-      .catch((err) => {
-        console.log("sad path: ", err);
-      });
-  };
+//   const handleReturn = () => {
+//     axiosWithAuth()
+      
+//   };
 
   const handleCancel = (e) => {
     console.log("Cancel button pushed, routing back to home.");
