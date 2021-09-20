@@ -1,46 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
-// import { axiosWithAuth } from "../../../helpers/axiosWithAuth";
 
 import schema from "../../../validation/SignInSchema";
 import SignInForm from "./SignInForm";
 import axios from "axios";
 
-/*
-import { axiosWithAuth } from "../helpers/axiosWithAuth";
 
-const initialState = {
-    username: "",
-    email: "",
-    password: "",
-  };
-  const history = useHistory();
-  const [credentials, setCredentials] = useState(initialState);
-
-  //The SignIn is not working fully yet.
-  const handleChanges = (e) => {
-    // console.log("value: ", e.target.value);
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
-
-  const submitSignUp = (e) => {
-    e.preventDefault();
-    // validate();
-
-    axiosWithAuth
-      .post("/auth/register", credentials)
-      .then((res) => {
-        console.log("happy path: ", res.data);
-        // localStorage.setItem("token", res.data);
-        // history.push("/private");
-      })
-      .catch((err) => {
-        console.log("sad path: ", err);
-      });
-  };
-
-*/
 
 const initialFormValues = {
   username: "",
@@ -95,20 +61,17 @@ export default function LogIn() {
   const logInUser = (userInformation) => {
     axios
       .post(
-        "https://family-recipes-app.herokuapp.com/mock/auth/login",
+        "https://family-recipes-app.herokuapp.com/api/auth/login",
         userInformation
       )
       .then((res) => {
-
         console.log("happy path: ", res.data);
-        console.log("MY id", res.data.user_id);
         localStorage.setItem("id", res.data.user_id);
+        localStorage.setItem("token", res.data.token);
         history.push("/home");
       })
       .catch((err) => {
-        // alert("failed!");
         console.log("sad path: ", err);
-        // debugger;
       })
       .finally(setFormValues(initialFormValues));
   };
