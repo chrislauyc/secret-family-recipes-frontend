@@ -9,9 +9,8 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
-import { RecipeContext } from "../context/RecipeContext";
-
-import { axiosWithAuth } from "../helpers/axiosWithAuth";
+import { RecipeContext } from "../../context/RecipeContext";
+import { axiosWithAuth } from "../../helpers/axiosWithAuth";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,7 +68,7 @@ export default function AddRecipe() {
 
     axiosWithAuth()
       .post(
-        "https://secret-family-recipes6.herokuapp.com/api/recipes/user/:id",
+        "https://secret-family-recipes6.herokuapp.com/mock/:user_id/recipes",
         recipe
       )
       .then((res) => {

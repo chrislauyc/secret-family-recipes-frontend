@@ -1,7 +1,8 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import React, { useState, useMemo } from "react";
-
-// import PrivateRoute from './view/PrivateRoute'
+import EditRecipe from './view/views/EditRecipe'
+import AddRecipe from './view/views/AddRecipe'
+import PrivateRoute from './view/PrivateRoute'
 import LogIn from './view/components/forms/LogIn';
 import Signup from './view/components/forms/SignUp'
 import Home from './view/components/Home'
@@ -26,13 +27,12 @@ function App() {
     <RecipeContext.Provider value={providerValue}>
       <Router>
         <div className="App">
-          <header className="App-header">
-          </header>
-          <Route exact path='/' component={LogIn}/>
-          <Route path='/signup' component={Signup}/>
-          <Route path='/home' component={Home}/>
-          {/* <PrivateRoute path='/edit' component={EditRecipe}/>
-          <PrivateRoute path='/add' component={AddRecipe}/> */}
+          <header className="App-header"></header>
+          <Route exact path="/" component={LogIn} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/home" component={Home} />
+          <PrivateRoute path="/EditRecipe" component={EditRecipe} />
+          <PrivateRoute path="/add" component={AddRecipe} />
         </div>
       </Router>
     </RecipeContext.Provider>

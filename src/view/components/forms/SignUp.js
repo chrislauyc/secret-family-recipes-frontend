@@ -71,7 +71,7 @@ export default function SignUp() {
       })
       .catch((err) => {
         console.log("sad path: ", err);
-        debugger;
+        // debugger;
       })
       .finally(setFormValues(initialFormValues));
   };

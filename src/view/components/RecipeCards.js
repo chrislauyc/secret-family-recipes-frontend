@@ -10,24 +10,25 @@ export default function RecipeCards({ searchForm }) {
   const { recipe, setRecipe } = useContext(RecipeContext);
   useEffect(() => {
     axiosWithAuth()
-      .get("/recipes")
+      .get("/:user_id/recipes")
       .then((res) => {
-        console.log("respone: ", res.data);
+        console.log("response: ", res.data);
 
         setRecipe(res.data);
       })
       .catch((err) => {
-        console.log(err);
-        debugger;
+        console.log('no data fetched', {err});
+        // debugger;
       });
-  }, []);
+    }, []);
+
   console.log("recipes: ", recipe);
-  console.log("Dummy data: ", cardsInformation);
+  // console.log("Dummy data: ", cardsInformation);
 
   return (
     <Container>
       <Grid spacing={6} container justifyContent="center" alignItems="baseline">
-        {cardsInformation.map((cardInfo, index) => {
+        {recipe.map((cardInfo, index) => {
           if (searchCategory === "all" && searchTerm === "") {
             // console.log("cardInfo: ", cardInfo);
             return (
@@ -48,9 +49,9 @@ export default function RecipeCards({ searchForm }) {
               </Grid>
             );
           } else {
-            //pass
+            return (<div></div>)
           }
-        })}
+          })}
       </Grid>
     </Container>
   );

@@ -1,8 +1,17 @@
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Typography, Button, Card, makeStyles, CardContent, CardActions, Grid, IconButton } from "@material-ui/core";
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  Typography,
+  Button,
+  Card,
+  makeStyles,
+  CardContent,
+  CardActions,
+  Grid,
+} from "@material-ui/core";
+// import { useHistory } from "react-router";
 
-import clsx from "clsx";
+// import clsx from "clsx";
 import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,29 +40,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipeCard({ cardInfo }) {
+  // const {push} = useHistory();
   const classes = useStyles();
-  const { id } = useParams();
-  const [expanded, setExpanded] = useState(false);
+  // const { id } = useParams();
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleClick = () => {
+    // push('/')
   };
-
-  console.log("id in recipecard component: ", id);
-  // console.log("card info id: ", cardInfo.id);
 
   return (
     <>
       <Card className={classes.root}>
-        <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
+        <CardContent onClick={handleClick}>
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
             Secret Recipe
           </Typography>
           <Typography variant="h5" component="h2">
             Title: {cardInfo.recipe_name}
           </Typography>
           <Typography className={classes.pos} color="textPrimay">
-            Recipe Source: {cardInfo.recipe_source}
+            Recipe Source: {cardInfo.source}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
             Category: {cardInfo.category}
@@ -69,41 +79,17 @@ export default function RecipeCard({ cardInfo }) {
           <Grid container justify="space-between">
             {/* EDIT BUTTON */}
             <Grid item>
-              <Link to={`/EditRecipe/${cardInfo.id}`} style={{ textDecoration: "none" }}>
+              <Link
+                to={`/EditRecipe/${cardInfo.recipe_id}`}
+                style={{ textDecoration: "none" }}
+              >
                 <Button color="primary" size="small">
                   Edit
                 </Button>
               </Link>
             </Grid>
-
-            {/* EXPAND BUTTON
-            <Grid item justify="flex-end">
-              <IconButton onClick={handleExpandClick}>
-                <ExpandMoreIcon
-                  className={clsx(classes.expand, {
-                    [classes.expandOpen]: expanded,
-                  })}
-                  aria-expanded={expanded}
-                  aria-label="show more"
-                />
-              </IconButton>
-            </Grid>
-          </Grid> */}
           </Grid>
         </CardActions>
-
-        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography className={classes.pos} variant="body2" component="p">
-              <Typography color="primary">Ingredients</Typography>
-              {cardInfo.ingredients}
-            </Typography>
-            <Typography variant="body2" component="p">
-              <Typography color="primary">Instructions</Typography>
-              {cardInfo.instructions}
-            </Typography>
-          </CardContent>
-        </Collapse> */}
       </Card>
     </>
   );

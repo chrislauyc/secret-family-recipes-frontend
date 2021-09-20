@@ -61,7 +61,7 @@ export default function SignUp() {
   const registerUser = (newUser) => {
     axios
       .post(
-        "https://secret-family-recipes6.herokuapp.com/api/auth/register",
+        "https://secret-family-recipes6.herokuapp.com/mock/auth/register",
         newUser
       )
       .then((res) => {
