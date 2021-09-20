@@ -34,11 +34,11 @@ const useStyles = makeStyles((theme) => ({
 export default function RecipeCard({ cardInfo }) {
   // const {push} = useHistory();
   const classes = useStyles();
-  // const { id } = useParams();
+  const { id } = useParams();
   
 
   const handleClick = () => {
-    // push('/')
+    push(`/${id}/recipe`)
   }
 
   return (
