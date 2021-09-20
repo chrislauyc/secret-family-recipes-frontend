@@ -7,6 +7,7 @@ import Signup from './view/components/forms/SignUp'
 import Home from './view/components/Home'
 
 import { RecipeContext } from "./context/RecipeContext";
+import Recipe from "./view/components/Recipe";
 
 function App() {
   const initialValues = [
@@ -31,6 +32,7 @@ function App() {
           <Route exact path='/' component={LogIn}/>
           <Route path='/signup' component={Signup}/>
           <PrivateRoute path='/home' component={Home}/>
+          <PrivateRoute path='/:id/recipe' component={Recipe}/>
           {/* <PrivateRoute path='/edit' component={EditRecipe}/>
           <PrivateRoute path='/add' component={AddRecipe}/> */}
         </div>
