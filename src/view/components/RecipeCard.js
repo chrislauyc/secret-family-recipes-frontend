@@ -33,19 +33,19 @@ const useStyles = makeStyles((theme) => ({
 export default function RecipeCard({ cardInfo }) {
   const classes = useStyles();
   const { id } = useParams();
-  // const [expanded, setExpanded] = useState(false);
-
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  // };
+  
 
   console.log("id in recipecard component: ", id);
   // console.log("card info id: ", cardInfo.id);
 
+  const handleClick = () => {
+    console.log("ran")
+  }
+
   return (
     <>
-      <Card className={classes.root}>
-        <CardContent>
+      <Card className={classes.root} >
+        <CardContent onClick={handleClick}>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
             Secret Recipe
           </Typography>
@@ -53,7 +53,7 @@ export default function RecipeCard({ cardInfo }) {
             Title: {cardInfo.recipe_name}
           </Typography>
           <Typography className={classes.pos} color="textPrimay">
-            Recipe Source: {cardInfo.recipe_source}
+            Recipe Source: {cardInfo.source}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
             Category: {cardInfo.category}
@@ -75,35 +75,8 @@ export default function RecipeCard({ cardInfo }) {
                 </Button>
               </Link>
             </Grid>
-
-            {/* EXPAND BUTTON
-            <Grid item justify="flex-end">
-              <IconButton onClick={handleExpandClick}>
-                <ExpandMoreIcon
-                  className={clsx(classes.expand, {
-                    [classes.expandOpen]: expanded,
-                  })}
-                  aria-expanded={expanded}
-                  aria-label="show more"
-                />
-              </IconButton>
-            </Grid>
-          </Grid> */}
           </Grid>
         </CardActions>
-
-        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography className={classes.pos} variant="body2" component="p">
-              <Typography color="primary">Ingredients</Typography>
-              {cardInfo.ingredients}
-            </Typography>
-            <Typography variant="body2" component="p">
-              <Typography color="primary">Instructions</Typography>
-              {cardInfo.instructions}
-            </Typography>
-          </CardContent>
-        </Collapse> */}
       </Card>
     </>
   );

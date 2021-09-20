@@ -61,12 +61,12 @@ export default function SignUp() {
   const registerUser = (newUser) => {
     axios
       .post(
-        "https://family-recipes-app.herokuapp.com/auth/register",
+        "https://family-recipes-app.herokuapp.com/mock/auth/register",
         newUser
       )
       .then((res) => {
         console.log("happy path: ", res.data);
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("id", res.data.user_id);
         history.push("/home");
       })
       .catch((err) => {

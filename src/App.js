@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import React, { useState, useMemo } from "react";
 
-// import PrivateRoute from './view/PrivateRoute'
+import PrivateRoute from './view/PrivateRoute'
 import LogIn from './view/components/forms/LogIn';
 import Signup from './view/components/forms/SignUp'
 import Home from './view/components/Home'
@@ -30,7 +30,7 @@ function App() {
           </header>
           <Route exact path='/' component={LogIn}/>
           <Route path='/signup' component={Signup}/>
-          <Route path='/home' component={Home}/>
+          <PrivateRoute path='/home' component={Home}/>
           {/* <PrivateRoute path='/edit' component={EditRecipe}/>
           <PrivateRoute path='/add' component={AddRecipe}/> */}
         </div>
