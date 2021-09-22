@@ -71,7 +71,7 @@ export default function LogIn() {
         history.push("/home");
       })
       .catch((err) => {
-        console.log("sad path: ", err);
+        console.log("sad path: ", {err});
       })
       .finally(setFormValues(initialFormValues));
   };
