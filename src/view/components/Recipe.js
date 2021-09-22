@@ -20,7 +20,7 @@ export default function Recipe() {
   const { recipe } = useContext(RecipeContext);
   const history = useHistory();
 //   const classes = useStyles();
-//   const { id } = useParams();
+  // const { id } = useParams();
 
 
 //   const handleReturn = () => {
@@ -28,7 +28,7 @@ export default function Recipe() {
       
 //   };
 
-  const handleCancel = (e) => {
+  const handleReturn = (e) => {
     console.log("Cancel button pushed, routing back to home.");
     history.push("/home");
   };
@@ -60,8 +60,8 @@ export default function Recipe() {
            <div>
              <Grid container>
                <Grid item>
-                 <Button onClick={handleCancel} variant="contained" size="small">
-                   Cancel
+                 <Button onClick={handleReturn} variant="contained" size="small">
+                   Go Back
                  </Button>
                </Grid>
              </Grid>

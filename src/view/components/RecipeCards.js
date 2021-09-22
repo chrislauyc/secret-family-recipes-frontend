@@ -48,7 +48,10 @@ export default function RecipeCards({ searchForm }) {
               </Grid>
             );
           } else {
-            return (<div></div>)
+            console.log("something went wrong with the search feature")
+            return (<Grid item key={index} xs={12} md={6} lg={4}>
+              <RecipeCard cardInfo={cardInfo} />
+            </Grid>)
           }
           })}
       </Grid>
