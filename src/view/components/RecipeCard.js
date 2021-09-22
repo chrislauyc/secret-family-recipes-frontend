@@ -51,21 +51,16 @@ export default function RecipeCard({ cardInfo }) {
           <Typography variant="h5" component="h2">
             Title: {cardInfo.recipe_name}
           </Typography>
-          <Typography className={classes.pos} color="textPrimay">
+          <Typography className={classes.pos} color="textPrimary">
             Recipe Source: {cardInfo.source}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
             Category: {cardInfo.category}
           </Typography>
-          <Typography className={classes.pos} variant="body2" component="p">
-            <Typography color="primary">Description</Typography>
-
-            {cardInfo.description}
-          </Typography>
         </CardContent>
 
         <CardActions disableSpacing>
-          <Grid container justify="space-between">
+          <Grid container justifyContent="space-between">
             {/* EDIT BUTTON */}
             <Grid item>
               <Link to={`/EditRecipe/${cardInfo.id}`} style={{ textDecoration: "none" }}>
