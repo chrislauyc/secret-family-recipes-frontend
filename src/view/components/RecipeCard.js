@@ -1,15 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Typography,
-  Button,
-  Card,
-  makeStyles,
-  CardContent,
-  CardActions,
-  Grid,
-} from "@material-ui/core";
-// import { useHistory } from "react-router";
+import { Typography, Button, Card, makeStyles, CardContent, CardActions, Grid } from "@material-ui/core";
+import { useHistory, useParams } from "react-router";
 
 // import clsx from "clsx";
 import { red } from "@material-ui/core/colors";
@@ -40,23 +32,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipeCard({ cardInfo }) {
-  // const {push} = useHistory();
+  const {push} = useHistory();
   const classes = useStyles();
-  // const { id } = useParams();
+  const { id } = useParams;
+  
 
   const handleClick = () => {
-    // push('/')
-  };
+    push(`/${id}/recipe`)
+  }
 
   return (
     <>
-      <Card className={classes.root}>
+      <Card className={classes.root} >
         <CardContent onClick={handleClick}>
-          <Typography
-            className={classes.title}
-            color="textSecondary"
-            gutterBottom
-          >
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
             Secret Recipe
           </Typography>
           <Typography variant="h5" component="h2">
@@ -76,7 +65,7 @@ export default function RecipeCard({ cardInfo }) {
         </CardContent>
 
         <CardActions disableSpacing>
-          <Grid container justify="space-between">
+          <Grid container justifyContent="space-between">
             {/* EDIT BUTTON */}
             <Grid item>
               <Link

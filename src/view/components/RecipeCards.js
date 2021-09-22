@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from "react";
 import { Container, Grid } from "@material-ui/core";
-import { cardsInformation } from "../../dummyData";
 import RecipeCard from "./RecipeCard";
 import { RecipeContext } from "../../context/RecipeContext";
 import { axiosWithAuth } from "../../helpers/axiosWithAuth";
@@ -10,7 +9,7 @@ export default function RecipeCards({ searchForm }) {
   const { recipe, setRecipe } = useContext(RecipeContext);
   useEffect(() => {
     axiosWithAuth()
-      .get("/:user_id/recipes")
+      .get("/recipes")
       .then((res) => {
         console.log("response: ", res.data);
 
@@ -20,10 +19,10 @@ export default function RecipeCards({ searchForm }) {
         console.log('no data fetched', {err});
         // debugger;
       });
-    }, []);
+    }, [setRecipe]);
 
   console.log("recipes: ", recipe);
-  // console.log("Dummy data: ", cardsInformation);
+  
 
   return (
     <Container>
@@ -36,7 +35,7 @@ export default function RecipeCards({ searchForm }) {
                 <RecipeCard cardInfo={cardInfo} />
               </Grid>
             );
-          } else if (cardInfo.name.toLowerCase().includes(searchTerm.toLowerCase()) && (cardInfo.category === searchCategory || searchCategory === "all")) {
+          } else if (cardInfo.recipe_name.toLowerCase().includes(searchTerm.toLowerCase()) && (cardInfo.category.toLowerCase() === searchCategory.toLowerCase() || searchCategory === "all")) {
             return (
               <Grid item key={index} xs={12} md={6} lg={4}>
                 <RecipeCard cardInfo={cardInfo} />
