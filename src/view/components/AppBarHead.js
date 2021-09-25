@@ -34,13 +34,6 @@ export default function AppBarHead({ searchForm, setSearchForm }) {
                 Logout
               </Button>
             </Grid>
-
-            {/* <Link
-              to={'/AddRecipe'}
-              style={{ textDecoration: "none", margin: "0 -15rem 0 0"}}
-            > */}
-
-            {/* </Link> */}
           </Grid>
         </Toolbar>
       </AppBar>
