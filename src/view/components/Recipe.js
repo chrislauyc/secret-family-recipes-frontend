@@ -9,24 +9,22 @@ import { axiosWithAuth } from "../../helpers/axiosWithAuth";
 
 
 export default function Recipe() {
-  const [recipe, setRecipe] = useState();
+  const [recipe, setRecipe] = useState({});
   const history = useHistory();
   //   const classes = useStyles();
   const { id } = useParams();
-  console.log(id)
   useEffect(() => {
     axiosWithAuth()
       .get(`/recipes/${id}`)
       .then((res) => {
         console.log("respone: ", res.data);
-
         setRecipe(res.data);
       })
       .catch((err) => {
         console.log({err});
         debugger;
       });
-  }, []);
+  }, [id]);
 
 
   const handleReturn = (e) => {

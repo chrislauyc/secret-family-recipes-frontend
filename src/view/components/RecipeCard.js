@@ -33,8 +33,9 @@ export default function RecipeCard({ cardInfo }) {
   const title = cardInfo.recipe_name
 
   return (
-    <Link to={`/recipe/${id}`} style={{ textDecoration: "none" }}>
+    
       <Card className={classes.root}>
+        <Link to={`/recipe/${id}`} style={{ textDecoration: "none" }}>
         <CardContent>
           <Typography variant="h5" component="h2">
             {title.toUpperCase()}
@@ -46,9 +47,10 @@ export default function RecipeCard({ cardInfo }) {
             Category: {cardInfo.category}
           </Typography>
           <Paper>
-            <img src={cardInfo.image_url} alt={`Photo of ${cardInfo.recipe_name}`} className={classes.image}/>
+            <img src={cardInfo.image_url} alt={`${cardInfo.recipe_name}`} className={classes.image}/>
           </Paper>
         </CardContent>
+        </Link>
 
         <CardActions disableSpacing>
           <Grid container justifyContent="space-between">
@@ -62,6 +64,6 @@ export default function RecipeCard({ cardInfo }) {
           </Grid>
         </CardActions>
       </Card>
-    </Link>
+    
   );
 }
