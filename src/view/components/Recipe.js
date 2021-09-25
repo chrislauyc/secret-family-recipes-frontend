@@ -1,27 +1,33 @@
-import React, { useContext }  from "react";
+import React, { useEffect, useState }  from "react";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 import { Button, Grid, Typography } from "@material-ui/core";
-import { RecipeContext } from "../../context/RecipeContext";
 
+import { axiosWithAuth } from "../../helpers/axiosWithAuth";
 
-// import { axiosWithAuth } from "../../helpers/axiosWithAuth";
-// import axios from "axios";
 
 
 
 export default function Recipe() {
-  const { recipe } = useContext(RecipeContext);
-  // const recipe = cardsInformation[1]
+  const [recipe, setRecipe] = useState();
   const history = useHistory();
-//   const classes = useStyles();
-  const { id } = useParams;
+  //   const classes = useStyles();
+  const { id } = useParams();
+  console.log(id)
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/recipes/${id}`)
+      .then((res) => {
+        console.log("respone: ", res.data);
 
+        setRecipe(res.data);
+      })
+      .catch((err) => {
+        console.log({err});
+        debugger;
+      });
+  }, []);
 
-//   const handleReturn = () => {
-//     axiosWithAuth()
-      
-//   };
 
   const handleReturn = (e) => {
     console.log("Cancel button pushed, routing back to home.");
@@ -47,6 +53,3 @@ export default function Recipe() {
       </Grid>
   );
 }
-//  // <form className={classes.root} noValidate autoComplete="off">
-//     //   
-//     // </form>

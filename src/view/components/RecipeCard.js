@@ -33,7 +33,7 @@ export default function RecipeCard({ cardInfo }) {
   const title = cardInfo.recipe_name
 
   return (
-    <Link to={`/${id}/recipe`} style={{ textDecoration: "none" }}>
+    <Link to={`/recipe/${id}`} style={{ textDecoration: "none" }}>
       <Card className={classes.root}>
         <CardContent>
           <Typography variant="h5" component="h2">
