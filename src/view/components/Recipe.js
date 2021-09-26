@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/styles";
 import HomeIcon from '@mui/icons-material/Home';
 import { axiosWithAuth } from "../../helpers/axiosWithAuth";
 import { Checkbox } from "@mui/material";
+import { width } from "@mui/system";
 
 
 
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     recipeContainer: {
         maxWidth:"80rem",
         margin:"auto"
+
     },
     introContainer: {
         height: "35rem",
@@ -39,14 +41,15 @@ const useStyles = makeStyles((theme) => ({
     ingredients: {
         width: "35%",
         height: "fit-content",
-        border: "3px dashed grey",
+        // border: "3px dashed grey",
         borderRadius: "10px",
-        backgroundColor: "#FC977B",
+        backgroundColor: "#F0EBEA",
         
     },
     ingTitle: {
         width: "100%",
-        textAlign: "center"
+        textAlign: "center",
+        borderBottom:"2px solid black"
     },
     ingredient: {
         "& p": {
@@ -60,7 +63,19 @@ const useStyles = makeStyles((theme) => ({
         marginRight: ".2rem"
     },
     steps: {
-        
+        display: "flex",
+        flexDirection: "column",
+    },
+    step: {
+        display: "flex",
+        flexDirection: "column",
+        alignContent: "center"
+    },
+    stepNumber: {
+        width: "80%"
+    },
+    stepDescription: {
+        marginLeft: "50px"
     }
   }));
 
@@ -106,6 +121,8 @@ export default function Recipe() {
                <div className={classes.image} style={{backgroundImage: `url(${recipe.image_url})`}}/>
                <div className={classes.ingredients}>
                    <div className={classes.ingTitle}><h3>Ingredients</h3></div>
+                   {/* <div className={classes.ingredient}><p className={classes.name}>{recipe.ingredients}</p></div> */}
+                   
                    <div className={classes.ingredient}>
                         <Checkbox/>
                         <p className={classes.amount}>amount</p>
@@ -131,10 +148,15 @@ export default function Recipe() {
                </div>
            </div>
            <div className={classes.steps}>
+                <div className={classes.step}>
+                    <h2 className={classes.stepNumber}>Step 1: </h2>
+                    <p className={classes.stepDescription}> {recipe.descriptions}</p>
+                </div>
                {/* {recipe.steps.map((step,int) => {
                    return(
                        <div className={classes.step}>
-                           <p>step {int}: <br/> {step}</p>
+                           <h2 className={classes.stepNumber}>Step {int}:</h2>
+                           <p className={classes.stepDescription}> {step}</p>
                        </div>
                    )
                })} */}
