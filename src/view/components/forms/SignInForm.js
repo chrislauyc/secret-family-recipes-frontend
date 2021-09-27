@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "50px",
     fontSize: "1.75rem",
   },
+  SignInForm: {
+    
+  }
   
 }));
 
@@ -42,8 +45,8 @@ export default function SignInForm({ values, change, submit, disabled }) {
   };
 
   return (
-    <form onSubmit={onSubmit} className="signPage-form">
-      <Paper elevation={10} className={classes.PapersStyle}>
+    <form onSubmit={onSubmit} className={classes.SignInForm}>
+      <Paper elevation={10} className={classes.PapersStyle} >
         <Grid
           container
           justifyContent="space-around"

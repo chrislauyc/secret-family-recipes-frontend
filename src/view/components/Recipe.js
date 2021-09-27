@@ -5,8 +5,8 @@ import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import HomeIcon from '@mui/icons-material/Home';
 import { axiosWithAuth } from "../../helpers/axiosWithAuth";
-import { Checkbox } from "@mui/material";
-import { width } from "@mui/system";
+// import { Checkbox } from "@mui/material";
+
 
 
 
@@ -121,9 +121,9 @@ export default function Recipe() {
                <div className={classes.image} style={{backgroundImage: `url(${recipe.image_url})`}}/>
                <div className={classes.ingredients}>
                    <div className={classes.ingTitle}><h3>Ingredients</h3></div>
-                   {/* <div className={classes.ingredient}><p className={classes.name}>{recipe.ingredients}</p></div> */}
+                   <div className={classes.ingredient}><p className={classes.name}>{recipe.ingredients}</p></div>
                    
-                   <div className={classes.ingredient}>
+                   {/* <div className={classes.ingredient}>
                         <Checkbox/>
                         <p className={classes.amount}>amount</p>
                         <p className={classes.unit}>unit</p>
@@ -134,7 +134,7 @@ export default function Recipe() {
                         <p className={classes.amount}>amount</p>
                         <p className={classes.unit}>unit</p>
                         <p className={classes.name}>name</p>
-                    </div>
+                    </div> */}
                    {/* {recipe.ingredients.map(ingredient => {
                        return(
                            <div className={classes.ingredient}>
@@ -149,7 +149,7 @@ export default function Recipe() {
            </div>
            <div className={classes.steps}>
                 <div className={classes.step}>
-                    <h2 className={classes.stepNumber}>Step 1: </h2>
+                    <h2 className={classes.stepNumber}>Directions: </h2>
                     <p className={classes.stepDescription}> {recipe.descriptions}</p>
                 </div>
                {/* {recipe.steps.map((step,int) => {

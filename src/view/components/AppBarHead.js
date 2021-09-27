@@ -14,7 +14,7 @@ export default function AppBarHead({ searchForm, setSearchForm }) {
   return (
     <>
       <AppBar className="AppBarRoot" position="sticky">
-        <Toolbar>
+        <Toolbar style={{backgroundColor:"#FF6969"}}>
           <Grid container justifyContent="space-around" alignItems="center">
             <Grid item xs={12} md={2} lg={2}>
               <Typography className="AppBarTitle" variant="h6">
