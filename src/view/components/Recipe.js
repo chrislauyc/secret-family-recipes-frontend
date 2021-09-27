@@ -1,76 +1,167 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState }  from "react";
 import { useHistory } from "react-router-dom";
-// import { makeStyles } from "@material-ui/core/styles";
-import { Button, Grid, Typography, Paper, TextField } from "@material-ui/core";
-import { RecipeContext } from "../../context/RecipeContext";
+import { useParams } from "react-router";
+import { Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import HomeIcon from '@mui/icons-material/Home';
+import { axiosWithAuth } from "../../helpers/axiosWithAuth";
+// import { Checkbox } from "@mui/material";
 
-// import { axiosWithAuth } from "../../helpers/axiosWithAuth";
-// import axios from "axios";
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     "& .MuiTextField-root": {
-//       margin: theme.spacing(1),
-//       width: "25ch",
-//     },
-//   },
-// }));
+
+
+
+const useStyles = makeStyles((theme) => ({
+    titleContainer: {
+      display: "flex",
+      justifyContent: "space-around",
+      width: "",
+      alignItems:"center",
+      borderBottom: "5px solid #FF6969"
+    },
+    recipeContainer: {
+        maxWidth:"80rem",
+        margin:"auto"
+
+    },
+    introContainer: {
+        height: "35rem",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
+        
+    },
+    image: {
+        width: "60%",
+        height: "100%",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "contain"
+    },
+    ingredients: {
+        width: "35%",
+        height: "fit-content",
+        // border: "3px dashed grey",
+        borderRadius: "10px",
+        backgroundColor: "#F0EBEA",
+        
+    },
+    ingTitle: {
+        width: "100%",
+        textAlign: "center",
+        borderBottom:"2px solid black"
+    },
+    ingredient: {
+        "& p": {
+            display:"inline"
+        },
+    },
+    name: {
+        marginLeft: ".5rem"
+    },
+    amount: {
+        marginRight: ".2rem"
+    },
+    steps: {
+        display: "flex",
+        flexDirection: "column",
+    },
+    step: {
+        display: "flex",
+        flexDirection: "column",
+        alignContent: "center"
+    },
+    stepNumber: {
+        width: "80%"
+    },
+    stepDescription: {
+        marginLeft: "50px"
+    }
+  }));
+
 
 export default function Recipe() {
-  const { recipe } = useContext(RecipeContext);
+  const [recipe, setRecipe] = useState({});
+  const [name, setName] = useState("")
   const history = useHistory();
-//   const classes = useStyles();
-  // const { id } = useParams();
+  const classes = useStyles();
+  const { id } = useParams();
 
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/recipes/${id}`)
+      .then((res) => {
+        console.log("respone: ", res.data);
+        setRecipe(res.data);
+        setName(res.data.recipe_name.toUpperCase())
+      })
+      .catch((err) => {
+        console.log({err});
+        debugger;
+      });
+  }, [id]);
 
-//   const handleReturn = () => {
-//     axiosWithAuth()
-      
-//   };
 
   const handleReturn = (e) => {
     console.log("Cancel button pushed, routing back to home.");
     history.push("/home");
   };
 
+
   return (
-   <Paper>
-       <Grid container alignItems="center" justifyContent="center" style={{ minHeight: "100vh" }}>
-         <Typography variant="h5" component="h2">
-           Edit Recipe {recipe.name}
-         </Typography>{" "}
-         <br />
-         <Grid item xs={12}>
-           <div>
-             <TextField id="outlined-basic" name="name" label="Name" variant="outlined" value={recipe.name} />
+       <div className={classes.recipeContainer}>
+           <div className={classes.titleContainer}>
+               <h1>{name}</h1>
+
+               <Button variant="contained" startIcon={<HomeIcon/>} onClick={handleReturn} style={{height:"fit-content"}}>
+                   Home
+               </Button>
            </div>
-           <div>
-             {" "}
-             <TextField id="outlined-basic" name="source" label="Source" variant="outlined" value={recipe.source} />
+           <div className={classes.introContainer}>
+               <div className={classes.image} style={{backgroundImage: `url(${recipe.image_url})`}}/>
+               <div className={classes.ingredients}>
+                   <div className={classes.ingTitle}><h3>Ingredients</h3></div>
+                   <div className={classes.ingredient}><p className={classes.name}>{recipe.ingredients}</p></div>
+                   
+                   {/* <div className={classes.ingredient}>
+                        <Checkbox/>
+                        <p className={classes.amount}>amount</p>
+                        <p className={classes.unit}>unit</p>
+                        <p className={classes.name}>name</p>
+                    </div>
+                    <div className={classes.ingredient}>
+                        <Checkbox/>
+                        <p className={classes.amount}>amount</p>
+                        <p className={classes.unit}>unit</p>
+                        <p className={classes.name}>name</p>
+                    </div> */}
+                   {/* {recipe.ingredients.map(ingredient => {
+                       return(
+                           <div className={classes.ingredient}>
+                               <Checkbox/>
+                               <p className={classes.amount}>{ingredient.amount}</p>
+                               <p className={classes.unit}>{ingredient.unit}</p>
+                               <p className={classes.name}>{ingredient.name}</p>
+                           </div>
+                       )
+                   })} */}
+               </div>
            </div>
-           <div>
-             <TextField id="outlined-multiline-static" name="description" label="Description" multiline rows={8} variant="outlined" value={recipe.description} />
+           <div className={classes.steps}>
+                <div className={classes.step}>
+                    <h2 className={classes.stepNumber}>Directions: </h2>
+                    <p className={classes.stepDescription}> {recipe.descriptions}</p>
+                </div>
+               {/* {recipe.steps.map((step,int) => {
+                   return(
+                       <div className={classes.step}>
+                           <h2 className={classes.stepNumber}>Step {int}:</h2>
+                           <p className={classes.stepDescription}> {step}</p>
+                       </div>
+                   )
+               })} */}
            </div>
-           <div>
-             <TextField id="outlined-multiline-static" name="ingredients" label="Ingredients" multiline rows={8} variant="outlined" value={recipe.Ingredients} />
-           </div>
-           <div>
-             <TextField id="outlined-multiline-static" name="instructions" label="Instructions" multiline rows={8} variant="outlined" value={recipe.instructions} />
-           </div>
-           <div>
-             <Grid container>
-               <Grid item>
-                 <Button onClick={handleReturn} variant="contained" size="small">
-                   Go Back
-                 </Button>
-               </Grid>
-             </Grid>
-           </div>
-         </Grid>
-       </Grid>
-   </Paper>
+       </div>
   );
 }
- // <form className={classes.root} noValidate autoComplete="off">
-    //   
-    // </form>
+// recipe.image_url

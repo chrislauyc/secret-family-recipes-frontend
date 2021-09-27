@@ -14,7 +14,7 @@ export default function AppBarHead({ searchForm, setSearchForm }) {
   return (
     <>
       <AppBar className="AppBarRoot" position="sticky">
-        <Toolbar>
+        <Toolbar style={{backgroundColor:"#FF6969"}}>
           <Grid container justifyContent="space-around" alignItems="center">
             <Grid item xs={12} md={2} lg={2}>
               <Typography className="AppBarTitle" variant="h6">
@@ -34,13 +34,6 @@ export default function AppBarHead({ searchForm, setSearchForm }) {
                 Logout
               </Button>
             </Grid>
-
-            {/* <Link
-              to={'/AddRecipe'}
-              style={{ textDecoration: "none", margin: "0 -15rem 0 0"}}
-            > */}
-
-            {/* </Link> */}
           </Grid>
         </Toolbar>
       </AppBar>

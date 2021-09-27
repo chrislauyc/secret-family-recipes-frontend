@@ -19,7 +19,7 @@ export default function RecipeCards({ searchForm }) {
         console.log(err);
         debugger;
       });
-    }, [setRecipe]);
+  }, [setRecipe]);
 
   console.log("recipes: ", recipe);
   

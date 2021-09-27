@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React, { useState, useMemo } from "react";
 
 import PrivateRoute from './view/PrivateRoute'
@@ -9,15 +9,18 @@ import Home from './view/components/Home'
 import { RecipeContext } from "./context/RecipeContext";
 import Recipe from "./view/components/Recipe";
 
+
 function App() {
   const initialValues = [
     {
-      name: "",
-      source: "",
-      category: "",
-      description: "",
-      ingredients: "",
-      instructions: "",
+      recipe_id: 2,
+      user_id: 3,
+      category: "dessert",
+      recipe_name: "strawberry pretzel salad",
+      image_url: "https://images-gmi-pmc.edge-generalmills.com/fbd3fe36-262c-4441-8dfd-1f9a621174e4.jpg",
+      source: "grandmother",
+      ingredients: "strawberry",
+      descriptions: "cook"
     },
   ];
   const [recipe, setRecipe] = useState(initialValues);
@@ -26,16 +29,14 @@ function App() {
   return (
     <RecipeContext.Provider value={providerValue}>
       <Router>
-        <div className="App">
-          <header className="App-header">
-          </header>
+        <Switch>
           <Route exact path='/' component={LogIn}/>
           <Route path='/signup' component={Signup}/>
           <PrivateRoute path='/home' component={Home}/>
-          <PrivateRoute path='/:id/recipe' component={Recipe}/>
+          <PrivateRoute path='/recipe/:id' component={Recipe}/>
           {/* <PrivateRoute path='/edit' component={EditRecipe}/>
           <PrivateRoute path='/add' component={AddRecipe}/> */}
-        </div>
+        </Switch>
       </Router>
     </RecipeContext.Provider>
   );

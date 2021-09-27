@@ -1,17 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Typography, Button, Card, makeStyles, CardContent, CardActions, Grid } from "@material-ui/core";
-import { useHistory, useParams } from "react-router";
-
-// import clsx from "clsx";
-import { red } from "@material-ui/core/colors";
+import { Typography, Button, Card, makeStyles, CardContent, CardActions, Grid, Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 100,
-  },
-  title: {
-    fontSize: 14,
   },
   pos: {
     marginBottom: 12,
@@ -26,30 +19,26 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: "rotate(180deg)",
   },
-  avatar: {
-    backgroundColor: red[500],
-  },
+  image: {
+    maxWidth: "100%",
+    maxHeight: "100%",
+    borderRadius: "5px"
+  }
 }));
 
 export default function RecipeCard({ cardInfo }) {
-  const {push} = useHistory();
+  console.log(cardInfo)
   const classes = useStyles();
-  const { id } = useParams;
-  
-
-  const handleClick = () => {
-    push(`/${id}/recipe`)
-  }
+  const id = cardInfo.recipe_id;
+  const title = cardInfo.recipe_name
 
   return (
-    <>
-      <Card className={classes.root} >
-        <CardContent onClick={handleClick}>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            Secret Recipe
-          </Typography>
+    
+      <Card className={classes.root}>
+        <Link to={`/recipe/${id}`} style={{ textDecoration: "none" }}>
+        <CardContent>
           <Typography variant="h5" component="h2">
-            Title: {cardInfo.recipe_name}
+            {title.toUpperCase()}
           </Typography>
           <Typography className={classes.pos} color="textPrimary">
             Recipe Source: {cardInfo.source}
@@ -57,11 +46,14 @@ export default function RecipeCard({ cardInfo }) {
           <Typography className={classes.pos} color="textSecondary">
             Category: {cardInfo.category}
           </Typography>
+          <Paper>
+            <img src={cardInfo.image_url} alt={`${cardInfo.recipe_name}`} className={classes.image}/>
+          </Paper>
         </CardContent>
+        </Link>
 
         <CardActions disableSpacing>
           <Grid container justifyContent="space-between">
-            {/* EDIT BUTTON */}
             <Grid item>
               <Link to={`/EditRecipe/${cardInfo.id}`} style={{ textDecoration: "none" }}>
                 <Button color="primary" size="small">
@@ -72,6 +64,6 @@ export default function RecipeCard({ cardInfo }) {
           </Grid>
         </CardActions>
       </Card>
-    </>
+    
   );
 }
